@@ -64,7 +64,9 @@ class NewVisitorTest(LiveServerTestCase):
         francis_list_url = self.browser.current_url
         self.assertRegex(edith_list_url, "/lists/.+")
         self.assertNotEqual(francis_list_url, edith_list_url)
+        self.browser.delete_all_cookies()
 
+        self.browser.get(self.live_server_url)
         page_text = self.browser.find_element(By.TAG_NAME, "body").text
         self.assertNotIn("Buy peacock feathers", page_text)
         self.assertIn("Buy milk", page_text)
